@@ -1,0 +1,108 @@
+{
+  "id": "",
+  "job": {
+    "jobId": "A1234",
+    "jobTitle": "Software Engineer II",
+    "jobCompany": "iAssist",
+    "jobLocation": "San Jose, CA",
+    "jobUrl": "http://www.linkedin.com"
+  },
+  "applicant": {
+    "fullName": "Example Name",
+    "email": "example@yahoo.com",
+    "phoneNumber": "+1-201-100-1000",
+    "resume": {
+      "file": {
+        "id": "d81d54c3b046c5cafc91805847a2dd92266b868e4a9b16b8237cff1f3e709e0d",
+        "fileName": "example_resume.pdf",
+        "contentType": "application.pdf",
+        "keywords": "architect, python, java, AI, ChatGPT"
+      },
+      "json": {
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "email": "first.last@yahoo.com",
+        "headline": "",
+        "summary": "",
+        "additionalInfo": "",
+        "phoneNumber": "08886485454",
+        "location": {
+          "country": "US",
+          "city": "anytown, OH",
+          "postalcode": ""
+        },
+        "skills": "architect, python, java, AI, ChatGPT",
+        "positions": {
+          "_total": 2,
+          "values": [{
+            "startDateMonth": "01",
+            "startDateYear": "2019",
+            "endDateMonth": "11",
+            "endDateYear": "2019",
+            "endCurrent": false,
+            "title": "Software Engineer I",
+            "company": "Netflix",
+            "location": "New York, NY",
+            "description": "Part of the team supporting chaos monkey."
+          }, {
+            "startDateMonth": "10",
+            "startDateYear": "2018",
+            "endDateMonth": "12",
+            "endDateYear": "2018",
+            "endCurrent": false,
+            "title": "Junior Developer",
+            "company": "JPMorgan Chase",
+            "location": "New York, NY",
+            "description": "Part of Middle Office applications team implementing straight through processing."
+          }]
+        },
+        "educations": {
+          "_total": 1,
+          "values": [{
+            "degree": "BS",
+            "field": "Computer Science",
+            "school": "Indiana State",
+            "location": "New York, NY",
+            "endCurrent": false
+          }]
+        },
+        "links": {
+          "_total": 1,
+          "values": [{
+            "publicProfileUrl": "https://linkedin.com/firstName.lastName"
+          }]
+        },
+        "awards": {
+          "_total": 0,
+          "values": []
+        },
+        "certifications": {
+          "_total": 0,
+          "values": []
+        },
+        "associations": {
+          "_total": 0,
+          "values": []
+        },
+        "patents": {
+          "_total": 0,
+          "values": []
+        },
+        "publications": {
+          "_total": 0,
+          "values": []
+        },
+        "militaryServices": {
+          "_total": 0,
+          "values": []
+        }
+      }
+    }
+  },
+  "analytics": {
+    "referer": "https://linkedin.com",
+    "ip": "172.19.215.216"
+  },
+  "appliedOnMillis": 1617611379562,
+  "locale": "en"
+}
