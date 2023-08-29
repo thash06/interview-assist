@@ -28,14 +28,16 @@ public class InterviewAssistController {
     @ResponseBody
     public ResponseEntity<String> createInterviewLoop(@RequestBody final String requestBody,
                                                       @PathVariable("email") String emailAddress){
+        Applicant candidate = null;
         try{
-            Applicant candidate = candidateService.findByEmail(emailAddress);
+            candidate = candidateService.findByEmail(emailAddress);
+            log.info("Candidate: {}", candidate);
             interviewLoopService.createInterviewLoop(candidate);
         } catch(Exception e){
             return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         finally {
-            return ResponseEntity.status(HttpStatus.CREATED).body("SUCCESS:" + emailAddress);
+            return ResponseEntity.status(HttpStatus.CREATED).body("SUCCESS:" + candidate);
         }
     }
 }

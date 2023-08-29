@@ -1,0 +1,17 @@
+{
+      "firstName": "Java",
+      "lastName": "Interviewer",
+      "email": "first.last@yahoo.com",
+      "phoneNumber": "08886485454",
+      "location": {
+        "country": "US",
+        "city": "anytown, OH",
+        "postalcode": ""
+      },
+      "skills": "java",
+      "certifications": {
+        "_total": 0,
+        "values": []
+      }
+
+}

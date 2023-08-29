@@ -9,7 +9,7 @@
   },
   "applicant": {
     "fullName": "Example Name",
-    "email": "example@yahoo.com",
+    "email": "candidateone@yahoo.com",
     "phoneNumber": "+1-201-100-1000",
     "resume": {
       "file": {
