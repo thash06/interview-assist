@@ -85,8 +85,6 @@ public class CandidateServiceImpl implements CandidateService {
             }
         }).collect(Collectors.toList());
         return interviewers;
-//        String interviewerJson = readFile(String.format("%s/%s.json", CANDIDATE_PROFILE_LOCATION, "interviewer-001"));
-//        return Arrays.asList(convertJsonToInterviewer(interviewerJson));
     }
 
     private Interviewer convertJsonToInterviewer(String interviewerJson) throws JsonProcessingException {
