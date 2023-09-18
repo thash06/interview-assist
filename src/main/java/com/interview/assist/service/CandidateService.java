@@ -9,12 +9,9 @@ import java.util.List;
 
 public interface CandidateService {
 
-    void init() throws Exception;
 
     boolean saveProfile(MultipartFile file) throws IOException;
 
     Applicant findByEmail(String email) throws Exception;
-
-    List<Interviewer> loadInterviewers() throws Exception;
 
 }

@@ -2,6 +2,7 @@
 package com.interview.assist.model;
 
 import com.fasterxml.jackson.annotation.*;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.annotation.Generated;
 import java.util.Objects;
@@ -20,6 +21,7 @@ import java.util.Objects;
     "certifications"
 })
 @Generated("jsonschema2pojo")
+@Document("interviewer")
 public class Interviewer {
 
     @JsonProperty("employeeId")

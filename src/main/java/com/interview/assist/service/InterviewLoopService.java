@@ -2,6 +2,7 @@ package com.interview.assist.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.interview.assist.model.Applicant;
+import com.interview.assist.model.Interviewer;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -9,9 +10,9 @@ import java.util.List;
 
 public interface InterviewLoopService {
 
-
+    void init() throws Exception;
     List<String> createInterviewLoop(Applicant candidate);
 
-    String saveTicker(String tickerJson) throws JsonProcessingException;
+    List<Interviewer> loadInterviewers() throws Exception;
 
 }

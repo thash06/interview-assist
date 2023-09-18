@@ -2,6 +2,7 @@ package com.interview.assist;
 
 import com.interview.assist.config.InterviewAssistantProperties;
 import com.interview.assist.service.CandidateService;
+import com.interview.assist.service.InterviewLoopService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,9 +19,9 @@ public class InterviewAssistantApplication {
 
 
     @Bean
-    CommandLineRunner init(CandidateService candidateService) {
+    CommandLineRunner init(InterviewLoopService interviewLoopService) {
         return (args) -> {
-            candidateService.init();
+            interviewLoopService.init();
         };
     }
 

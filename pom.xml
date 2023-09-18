@@ -115,6 +115,19 @@
 			<optional>true</optional>
 		</dependency>
 
+
+		<!-- Java MongoDB Driver dependency -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
+
+		<!-- slf4j logging dependency, required for logging output from the MongoDB Java Driver -->
+<!--		<dependency>-->
+<!--			<groupId>org.slf4j</groupId>-->
+<!--			<artifactId>slf4j-jdk14</artifactId>-->
+<!--			<version>1.7.28</version>-->
+<!--		</dependency>-->
 	</dependencies>
 
 	<build>
