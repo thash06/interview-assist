@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.interview.assist.exception.InterviewAssistanceException;
 import com.interview.assist.model.Applicant;
 import com.interview.assist.model.Interviewer;
 import com.interview.assist.model.InterviewerSchedule;
@@ -40,7 +41,7 @@ public class InterviewLoopServiceImpl implements InterviewLoopService {
 
     private List<Interviewer> interviewers;
     @Override
-    public void init() throws Exception{
+    public void init() throws InterviewAssistanceException {
         try {
             interviewers = mongoTemplate.findAll(Interviewer.class);
             interviewers.forEach(i->
@@ -48,12 +49,12 @@ public class InterviewLoopServiceImpl implements InterviewLoopService {
             );
             if(CollectionUtils.isEmpty(interviewers)){
                 interviewers = loadInterviewers();
-                interviewers.stream().forEach(interviewer -> mongoTemplate.insert(interviewer));
+                interviewers.forEach(mongoTemplate::insert);
             }
 
         } catch (Exception e) {
             log.error("Unable to insert data into Mongo: {}", e.getMessage(), e);
-            throw new RuntimeException(e);
+            throw new InterviewAssistanceException(e);
         }
     }
     @Override
@@ -83,23 +84,23 @@ public class InterviewLoopServiceImpl implements InterviewLoopService {
         Map<String, Object> properties = candidate.getAdditionalProperties();
         String applicantSkills = ((Map<String, Object>)((Map<String, Object>)((Map<String, Object>)properties.get("applicant")).get("resume")).get("json")).get("skills").toString();
         //applicantSkills = ((Map.Entry)((Map)((Map.Entry)((Map)((Map.Entry)((Map)((Map.Entry)((Map)properties).entrySet().toArray()[2]).getValue()).entrySet().toArray()[3]).getValue()).entrySet().toArray()[1]).getValue()).entrySet().toArray()[8]).getValue();
-        return Arrays.stream(applicantSkills.split(",")).map(s -> s.trim()).collect(Collectors.toList());
+        return Arrays.stream(applicantSkills.split(",")).map(String::trim).collect(Collectors.toList());
     }
 
     @Override
-    public List<Interviewer> loadInterviewers() throws Exception{
+    public List<Interviewer> loadInterviewers() throws InterviewAssistanceException{
         List<String> interviewerIds = Arrays.asList("001", "002", "003", "004");
         List<Interviewer> interviewers =  interviewerIds.stream().map(interviewerId -> {
             try {
                 return fileRepository.readFile(String.format("%s/interviewer-%s.json", INTERVIEWER_PROFILE_LOCATION, interviewerId));
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                throw new InterviewAssistanceException(e);
             }
         }).map(interviewerJson -> {
             try {
                 return convertJsonToInterviewer(interviewerJson);
             } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
+                throw new InterviewAssistanceException(e);
             }
         }).collect(Collectors.toList());
         return interviewers;
@@ -121,7 +122,4 @@ public class InterviewLoopServiceImpl implements InterviewLoopService {
         }
         return interviewer;
     }
-
-
-
 }
