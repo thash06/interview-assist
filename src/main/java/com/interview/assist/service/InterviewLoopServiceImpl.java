@@ -1,6 +1,5 @@
 package com.interview.assist.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -77,7 +76,7 @@ public class InterviewLoopServiceImpl implements InterviewLoopService {
 
     private Map<String, List<Interviewer>> identifyInterviewers(List<String> skills) {
         List<Interviewer> interviewers = interviewerRepository.findBySkill(skills);
-        return interviewers.stream().collect(Collectors.groupingBy(interviewer -> interviewer.getSkills()));
+        return interviewers.stream().collect(Collectors.groupingBy(Interviewer::getSkills));
     }
 
     private List<String> getCandidateSkills(Applicant candidate) {
@@ -90,23 +89,16 @@ public class InterviewLoopServiceImpl implements InterviewLoopService {
     @Override
     public List<Interviewer> loadInterviewers() throws InterviewAssistanceException{
         List<String> interviewerIds = Arrays.asList("001", "002", "003", "004");
-        List<Interviewer> interviewers =  interviewerIds.stream().map(interviewerId -> {
+        return interviewerIds.stream().map(interviewerId -> {
             try {
                 return fileRepository.readFile(String.format("%s/interviewer-%s.json", INTERVIEWER_PROFILE_LOCATION, interviewerId));
             } catch (Exception e) {
                 throw new InterviewAssistanceException(e);
             }
-        }).map(interviewerJson -> {
-            try {
-                return convertJsonToInterviewer(interviewerJson);
-            } catch (JsonProcessingException e) {
-                throw new InterviewAssistanceException(e);
-            }
-        }).collect(Collectors.toList());
-        return interviewers;
+        }).map(this::convertJsonToInterviewer).collect(Collectors.toList());
     }
 
-    private Interviewer convertJsonToInterviewer(String interviewerJson) throws JsonProcessingException {
+    private Interviewer convertJsonToInterviewer(String interviewerJson) throws InterviewAssistanceException {
         Interviewer interviewer;
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -118,7 +110,7 @@ public class InterviewLoopServiceImpl implements InterviewLoopService {
 
         } catch (IOException e) {
             log.error(e.getMessage(), e);
-            throw e;
+            throw new InterviewAssistanceException(e);
         }
         return interviewer;
     }
